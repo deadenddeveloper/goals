@@ -1,14 +1,11 @@
 import { Box, Button, Heading } from '@chakra-ui/react'
+import { Link } from '@remix-run/react'
 
 const Index = () => {
     return (
         <Box maxW="32rem">
-            <Heading mb={4}>
-                Modern online and offline payments for Africa
-            </Heading>
-            <Button size="lg" colorScheme="green" mt="24px">
-                Create a free account
-            </Button>
+            <Link to="/signup">Signup</Link>
+            <Link to="/login">Login</Link>
         </Box>
     )
 }
