@@ -48,6 +48,10 @@ export const meta: V2_MetaFunction = ({ data }) => {
             name: 'description',
             content: 'This app is the best',
         },
+        {
+            name: 'viewport',
+            content: 'width=device-width, initial-scale=1',
+        },
     ]
 }
 

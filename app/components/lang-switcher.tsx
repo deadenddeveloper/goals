@@ -1,14 +1,11 @@
 import { useTranslation } from 'react-i18next'
-import { Link, useMatches } from '@remix-run/react'
+import { Link } from '@remix-run/react'
 
 export const LangSwitcher = () => {
     const { i18n } = useTranslation()
     const langList = (i18n.options.supportedLngs as Array<string>).filter(
         (lang: string) => lang !== 'cimode'
     )
-
-    const matches = useMatches()
-    console.log('matches', matches)
 
     return (
         <div className="space-x-2">
@@ -22,7 +19,7 @@ export const LangSwitcher = () => {
                     }}
                     to={`?lng=${lang}`}
                 >
-                    {lang}
+                    {lang.toUpperCase()}
                 </Link>
             ))}
         </div>
