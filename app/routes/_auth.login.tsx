@@ -13,12 +13,8 @@ import {
 } from '@chakra-ui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRightToBracket } from '@fortawesome/free-solid-svg-icons'
-import {
-    faFacebook,
-    faGithub,
-    faGoogle,
-} from '@fortawesome/free-brands-svg-icons'
 import { Link as ReachLink } from '@remix-run/react'
+import { SocialLogin } from '~/components/auth'
 
 const Login = () => {
     const { t } = useTranslation('auth')
@@ -60,29 +56,7 @@ const Login = () => {
             <Box textAlign="center">
                 <Text color="gray">{t('login_social')}</Text>
             </Box>
-            <Stack direction="row" justify="center" spacing="4">
-                <Button
-                    leftIcon={<FontAwesomeIcon icon={faGoogle} />}
-                    colorScheme="purple"
-                    variant="outline"
-                >
-                    Google
-                </Button>
-                <Button
-                    leftIcon={<FontAwesomeIcon icon={faFacebook} />}
-                    colorScheme="purple"
-                    variant="outline"
-                >
-                    Facebook
-                </Button>
-                <Button
-                    leftIcon={<FontAwesomeIcon icon={faGithub} />}
-                    colorScheme="purple"
-                    variant="outline"
-                >
-                    Github
-                </Button>
-            </Stack>
+            <SocialLogin />
         </Stack>
     )
 }

@@ -1,6 +1,6 @@
 import { Link, Outlet } from '@remix-run/react'
 import { Box, Container, Flex, HStack, Text } from '@chakra-ui/react'
-import { LangSwitcher } from '~/components'
+import { LangSwitcher } from '~/components/common'
 
 const Auth = () => {
     return (
