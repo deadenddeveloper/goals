@@ -1,20 +1,20 @@
+import type { ActionArgs } from '@remix-run/node'
+
 import { useTranslation } from 'react-i18next'
-import {
-    Box,
-    Button,
-    Divider,
-    FormControl,
-    FormLabel,
-    Heading,
-    Input,
-    Stack,
-    Text,
-    Link,
-} from '@chakra-ui/react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faRightToBracket } from '@fortawesome/free-solid-svg-icons'
+import { Box, Divider, Heading, Stack, Text, Link } from '@chakra-ui/react'
 import { Link as ReachLink } from '@remix-run/react'
-import { SocialLogin } from '~/components/auth'
+import { AuthForm, SocialLogin } from '~/components/auth'
+import { login } from '~/services/auth'
+import { faRightToBracket } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+export const action = async ({ request }: ActionArgs) => {
+    const form = await request.formData()
+    const email = form.get('email') as string
+    const password = form.get('password') as string
+
+    return login(email, password)
+}
 
 const Login = () => {
     const { t } = useTranslation('auth')
@@ -31,22 +31,12 @@ const Login = () => {
             <Heading as="h1" size="md" textAlign="center">
                 {t('login')}
             </Heading>
-            <FormControl>
-                <FormLabel>{t('email')}</FormLabel>
-                <Input type="email" />
-            </FormControl>
-            <FormControl>
-                <FormLabel>{t('password')}</FormLabel>
-                <Input type="password" />
-            </FormControl>
-            <Box textAlign="center">
-                <Button
-                    leftIcon={<FontAwesomeIcon icon={faRightToBracket} />}
-                    colorScheme="purple"
-                >
-                    {t('login_with_email')}
-                </Button>
-            </Box>
+
+            <AuthForm
+                buttonText={t('login_with_email')}
+                buttonIcon={<FontAwesomeIcon icon={faRightToBracket} />}
+            />
+
             <Box textAlign="center">
                 <Link to="/signup" as={ReachLink}>
                     {t('to_signup')}

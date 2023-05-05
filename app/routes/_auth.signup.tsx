@@ -1,22 +1,22 @@
-import { useTranslation } from 'react-i18next'
-import {
-    Box,
-    Button,
-    Divider,
-    FormControl,
-    FormLabel,
-    Heading,
-    Input,
-    Stack,
-    Text,
-    Link,
-} from '@chakra-ui/react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faRightToBracket } from '@fortawesome/free-solid-svg-icons'
-import { Link as ReachLink } from '@remix-run/react'
-import { SocialLogin } from '~/components/auth'
+import type { ActionArgs } from '@remix-run/node'
 
-const Login = () => {
+import { useTranslation } from 'react-i18next'
+import { Box, Divider, Heading, Stack, Text, Link } from '@chakra-ui/react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { Link as ReachLink } from '@remix-run/react'
+import { AuthForm, SocialLogin } from '~/components/auth'
+import { signup } from '~/services/auth'
+
+export const action = async ({ request }: ActionArgs) => {
+    const form = await request.formData()
+    const email = form.get('email') as string
+    const password = form.get('password') as string
+
+    return signup(email, password)
+}
+
+const Signup = () => {
     const { t } = useTranslation('auth')
 
     return (
@@ -31,22 +31,12 @@ const Login = () => {
             <Heading as="h1" size="md" textAlign="center">
                 {t('signup')}
             </Heading>
-            <FormControl>
-                <FormLabel>{t('email')}</FormLabel>
-                <Input type="email" />
-            </FormControl>
-            <FormControl>
-                <FormLabel>{t('password')}</FormLabel>
-                <Input type="password" />
-            </FormControl>
-            <Box textAlign="center">
-                <Button
-                    leftIcon={<FontAwesomeIcon icon={faRightToBracket} />}
-                    colorScheme="purple"
-                >
-                    {t('signup_with_email')}
-                </Button>
-            </Box>
+
+            <AuthForm
+                buttonText={t('signup_with_email')}
+                buttonIcon={<FontAwesomeIcon icon={faUser} />}
+            />
+
             <Box textAlign="center">
                 <Link to="/login" as={ReachLink}>
                     {t('to_login')}
@@ -61,4 +51,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default Signup

@@ -1,0 +1,10 @@
+{
+  "required": "This field is required",
+  "email": "This field must be a valid email",
+  "min_one": "This field must be at least {{ min }} character",
+  "min_other": "This field must be at least {{ min }} characters",
+  "auth/email-already-in-use": "The email address is already in use by another account",
+  "auth/wrong-password": "Wrong password",
+  "auth/too-many-requests": "Too many requests",
+  "auth/user-not-found": "User not found"
+}

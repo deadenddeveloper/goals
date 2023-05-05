@@ -1,0 +1,9 @@
+{
+  "required": "Das Feld ist erforderlich",
+  "email": "Das Feld muss eine gültige E-Mail-Adresse enthalten",
+  "min": "Das Feld muss mindestens {{ min }} Zeichen lang sein",
+  "auth/email-already-in-use": "Die E-Mail-Adresse wird bereits verwendet",
+  "auth/wrong-password": "Das Passwort ist ungültig",
+  "auth/too-many-requests": "Zu viele Anfragen. Bitte versuchen Sie es später erneut",
+  "auth/user-not-found": "Es wurde kein Benutzerkonto mit dieser E-Mail-Adresse gefunden"
+}

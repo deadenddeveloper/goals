@@ -1,6 +1,12 @@
-import { Link, Outlet } from '@remix-run/react'
+import { Link, Outlet, useLoaderData } from '@remix-run/react'
 import { Box, Container, Flex, HStack, Text } from '@chakra-ui/react'
 import { LangSwitcher } from '~/components/common'
+import type { LoaderArgs } from '@remix-run/node'
+
+import { authMiddleware } from '~/middleware/auth'
+
+export const loader = async ({ request }: LoaderArgs) =>
+    authMiddleware(request, 'dashboard')
 
 const Auth = () => {
     return (

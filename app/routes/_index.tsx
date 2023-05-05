@@ -1,4 +1,4 @@
-import { Box, Button, Heading } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import { Link } from '@remix-run/react'
 
 const Index = () => {

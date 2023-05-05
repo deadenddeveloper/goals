@@ -120,7 +120,9 @@ const Document = withEmotionCache(
 export default function App() {
     return (
         <Document>
-            <ChakraProvider>
+            <ChakraProvider
+                toastOptions={{ defaultOptions: { position: 'top-right' } }}
+            >
                 <Outlet />
             </ChakraProvider>
         </Document>
