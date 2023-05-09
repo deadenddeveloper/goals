@@ -1,9 +1,9 @@
 import {
     createUserWithEmailAndPassword,
-    getAuth,
     signInWithEmailAndPassword,
+    signOut,
 } from 'firebase/auth'
-import { firebaseApp } from '~/services/firebase'
+import { auth as authService } from '~/services/firebase'
 import { userSchema } from '~/validation/user'
 import { presentYupValidationError } from '~/presenters/yup'
 import { ValidationError } from 'yup'
@@ -16,6 +16,10 @@ if (!sessionSecret) {
     throw new Error('SESSION_SECRET must be set')
 }
 
+const LOGGED_IN_REDIRECT = '/dashboard'
+const NOT_LOGGED_IN_REDIRECT = '/login'
+const SESSION_EXPIRATION = 60 * 60 * 24 * 365
+
 const storage = createCookieSessionStorage({
     cookie: {
         name: 'goals_session',
@@ -23,7 +27,7 @@ const storage = createCookieSessionStorage({
         secrets: [sessionSecret],
         sameSite: 'lax',
         path: '/',
-        maxAge: 60 * 60 * 24 * 365,
+        maxAge: SESSION_EXPIRATION,
         httpOnly: true,
     },
 })
@@ -71,12 +75,12 @@ const _auth = async (
         )
 
         const userCredential = await authFunction(
-            getAuth(firebaseApp),
+            authService,
             validated.email,
             validated.password
         )
 
-        return createSession(userCredential.user.uid, '/dashboard')
+        return createSession(userCredential.user.uid, LOGGED_IN_REDIRECT)
     } catch (error) {
         if (error instanceof ValidationError) {
             return json(presentYupValidationError(error), 422)
@@ -99,10 +103,15 @@ export const login = async (email: string, password: string) => {
 }
 
 export const logout = async (request: Request) => {
+    await signOut(authService)
     const session = await getSession(request)
-    return redirect('/login', {
+    return redirect(NOT_LOGGED_IN_REDIRECT, {
         headers: {
             'Set-Cookie': await storage.destroySession(session),
         },
     })
+}
+
+export const socialAuth = async (uid: string) => {
+    return createSession(uid, LOGGED_IN_REDIRECT)
 }
