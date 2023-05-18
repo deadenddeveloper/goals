@@ -20,6 +20,7 @@ import { useTranslation } from 'react-i18next'
 import { useChangeLanguage } from 'remix-i18next'
 import { json } from '@remix-run/router'
 import { i18nCookie } from '~/i18n/cookie'
+import { theme } from '../theme'
 
 export const loader = async (args: LoaderArgs) => {
     const locale = await i18next.getLocale(args.request)
@@ -121,6 +122,7 @@ export default function App() {
     return (
         <Document>
             <ChakraProvider
+                theme={theme}
                 toastOptions={{ defaultOptions: { position: 'top-right' } }}
             >
                 <Outlet />

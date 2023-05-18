@@ -73,7 +73,6 @@ export const SocialLogin = () => {
             {isProcessing && <Overlay />}
             <Button
                 leftIcon={<FontAwesomeIcon icon={faGoogle} />}
-                colorScheme="purple"
                 variant="outline"
                 onClick={() => handleSocialLogin(new GoogleAuthProvider())}
                 isDisabled={isProcessing}
@@ -82,7 +81,6 @@ export const SocialLogin = () => {
             </Button>
             <Button
                 leftIcon={<FontAwesomeIcon icon={faFacebook} />}
-                colorScheme="purple"
                 variant="outline"
                 onClick={() => handleSocialLogin(new FacebookAuthProvider())}
                 isDisabled={isProcessing}
@@ -91,7 +89,6 @@ export const SocialLogin = () => {
             </Button>
             <Button
                 leftIcon={<FontAwesomeIcon icon={faGithub} />}
-                colorScheme="purple"
                 variant="outline"
                 onClick={() => handleSocialLogin(new GithubAuthProvider())}
                 isDisabled={isProcessing}

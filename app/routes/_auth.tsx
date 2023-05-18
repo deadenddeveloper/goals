@@ -1,9 +1,9 @@
-import { Link, Outlet, useLoaderData } from '@remix-run/react'
-import { Box, Container, Flex, HStack, Text } from '@chakra-ui/react'
-import { LangSwitcher } from '~/components/common'
+import { Link, Outlet } from '@remix-run/react'
+import { Box, Container, Flex, Text } from '@chakra-ui/react'
 import type { LoaderArgs } from '@remix-run/node'
 
 import { authMiddleware } from '~/middleware/auth'
+import { Footer } from '~/components/common'
 
 export const loader = async ({ request }: LoaderArgs) =>
     authMiddleware(request, 'dashboard')
@@ -21,19 +21,7 @@ const Auth = () => {
                     <Outlet />
                 </Container>
             </Flex>
-            <Box as="footer" py="2" boxShadow="base">
-                <Container maxW="container.lg">
-                    <Flex justifyContent="space-between" alignItems="center">
-                        <HStack>
-                            <Text fontSize="sm">© 2023</Text>
-                            <a href="https://romanmeyer.dev" target="_blank">
-                                Roman Meyer
-                            </a>
-                        </HStack>
-                        <LangSwitcher></LangSwitcher>
-                    </Flex>
-                </Container>
-            </Box>
+            <Footer />
         </Flex>
     )
 }
