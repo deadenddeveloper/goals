@@ -35,16 +35,19 @@ const Index = () => {
                     </Flex>
                 </Container>
             </Box>
+
             <Box p="4">
                 <Container maxW="container.lg">
                     <Heading textAlign="center">Landing page</Heading>
                 </Container>
             </Box>
+
             <Flex as="main" flexGrow="1" alignItems="center" py="4">
                 <Container maxW="container.lg">
                     <Outlet />
                 </Container>
             </Flex>
+
             <Footer />
         </Flex>
     )
