@@ -62,7 +62,6 @@ export const AuthForm = (props: AuthFormProps) => {
                         onClick={resetActionError}
                         type="submit"
                         leftIcon={props.buttonIcon}
-                        colorScheme="purple"
                         isLoading={navigation.state === 'submitting'}
                     >
                         {props.buttonText}

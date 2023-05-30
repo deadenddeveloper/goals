@@ -4,6 +4,7 @@ import type { LoaderArgs } from '@remix-run/node'
 
 import { authMiddleware } from '~/middleware/auth'
 import { Footer } from '~/components/common'
+import { route } from '~/services/routes'
 
 export const loader = async ({ request }: LoaderArgs) =>
     authMiddleware(request, 'dashboard')
@@ -12,7 +13,7 @@ const Auth = () => {
     return (
         <Flex direction="column" minHeight="100vh">
             <Box as="header" py="2" textAlign="center" boxShadow="base">
-                <Link to="/">
+                <Link to={route('home')}>
                     <Text fontSize="lg">G O A L S</Text>
                 </Link>
             </Box>

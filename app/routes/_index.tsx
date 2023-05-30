@@ -11,6 +11,7 @@ import {
 import { Footer } from '~/components/common'
 import { Link, Outlet } from '@remix-run/react'
 import { useTranslation } from 'react-i18next'
+import { route } from '~/services/routes'
 
 const Index = () => {
     const { t } = useTranslation('auth')
@@ -20,15 +21,15 @@ const Index = () => {
             <Box as="header" py="2" textAlign="center" boxShadow="base">
                 <Container maxW="container.lg" mx="auto">
                     <Flex gap="2" alignItems="center" minW="max-content">
-                        <Link to="/">
+                        <Link to={route('home')}>
                             <Text fontSize="lg">G O A L S</Text>
                         </Link>
                         <Spacer />
                         <ButtonGroup gap="2">
-                            <Link to="/login">
+                            <Link to={route('login')}>
                                 <Button variant="outline">{t('login')}</Button>
                             </Link>
-                            <Link to="/signup">
+                            <Link to={route('signup')}>
                                 <Button>{t('signup')}</Button>
                             </Link>
                         </ButtonGroup>

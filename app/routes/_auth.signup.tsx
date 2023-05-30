@@ -7,6 +7,7 @@ import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { Link as ReachLink } from '@remix-run/react'
 import { AuthForm, SocialLogin } from '~/components/auth'
 import { signup } from '~/services/auth'
+import { route } from '~/services/routes'
 
 export const action = async ({ request }: ActionArgs) => {
     const form = await request.formData()
@@ -38,7 +39,7 @@ const Signup = () => {
             />
 
             <Box textAlign="center">
-                <Link to="/login" as={ReachLink}>
+                <Link to={route('login')} as={ReachLink}>
                     {t('to_login')}
                 </Link>
             </Box>

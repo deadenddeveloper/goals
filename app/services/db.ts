@@ -10,11 +10,10 @@ Goal.init(
             type: DataTypes.UUID,
             primaryKey: true,
         },
+        user_id: DataTypes.STRING,
         name: DataTypes.STRING,
         description: DataTypes.STRING,
+        status: DataTypes.STRING,
     },
     { sequelize }
 )
-;(async () => {
-    await sequelize.sync()
-})()

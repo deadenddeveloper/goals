@@ -7,6 +7,7 @@ import { AuthForm, SocialLogin } from '~/components/auth'
 import { login } from '~/services/auth'
 import { faRightToBracket } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { route } from '~/services/routes'
 
 export const action = async ({ request }: ActionArgs) => {
     const form = await request.formData()
@@ -38,7 +39,7 @@ const Login = () => {
             />
 
             <Box textAlign="center">
-                <Link to="/signup" as={ReachLink}>
+                <Link to={route('signup')} as={ReachLink}>
                     {t('to_signup')}
                 </Link>
             </Box>
