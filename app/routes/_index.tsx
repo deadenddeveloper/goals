@@ -9,12 +9,20 @@ import {
     Text,
 } from '@chakra-ui/react'
 import { Footer } from '~/components/common'
-import { Link, Outlet } from '@remix-run/react'
+import { Link, Outlet, useLoaderData } from '@remix-run/react'
 import { useTranslation } from 'react-i18next'
 import { route } from '~/services/routes'
+import { json } from '@remix-run/router'
+import { isUserSignedIn } from '~/services/auth'
+import type { LoaderArgs } from '@remix-run/node'
+
+export const loader = async ({ request }: LoaderArgs) => {
+    return json({ isUserSignedIn: await isUserSignedIn(request) })
+}
 
 const Index = () => {
     const { t } = useTranslation('auth')
+    const { isUserSignedIn } = useLoaderData<typeof loader>()
 
     return (
         <Flex direction="column" minHeight="100vh">
@@ -25,14 +33,24 @@ const Index = () => {
                             <Text fontSize="lg">G O A L S</Text>
                         </Link>
                         <Spacer />
-                        <ButtonGroup gap="2">
-                            <Link to={route('login')}>
-                                <Button variant="outline">{t('login')}</Button>
+                        {isUserSignedIn ? (
+                            <Link to={route('dashboard')}>
+                                <Button>
+                                    {t('dashboard', { ns: 'common' })}
+                                </Button>
                             </Link>
-                            <Link to={route('signup')}>
-                                <Button>{t('signup')}</Button>
-                            </Link>
-                        </ButtonGroup>
+                        ) : (
+                            <ButtonGroup gap="2">
+                                <Link to={route('login')}>
+                                    <Button variant="outline">
+                                        {t('login')}
+                                    </Button>
+                                </Link>
+                                <Link to={route('signup')}>
+                                    <Button>{t('signup')}</Button>
+                                </Link>
+                            </ButtonGroup>
+                        )}
                     </Flex>
                 </Container>
             </Box>
