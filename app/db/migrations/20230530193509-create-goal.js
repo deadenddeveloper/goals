@@ -7,15 +7,22 @@ module.exports = {
                 allowNull: false,
                 primaryKey: true,
                 type: Sequelize.UUID,
+                defaultValue: Sequelize.UUIDV4,
             },
             user_id: {
                 type: Sequelize.STRING,
             },
-            name: {
+            title: {
+                type: Sequelize.STRING,
+            },
+            subtitle: {
                 type: Sequelize.STRING,
             },
             description: {
                 type: Sequelize.STRING,
+            },
+            deadline: {
+                type: Sequelize.DATE,
             },
             options: {
                 type: Sequelize.JSON,
@@ -26,9 +33,10 @@ module.exports = {
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE,
+                defaultValue: Sequelize.NOW,
             },
             updatedAt: {
-                allowNull: false,
+                allowNull: true,
                 type: Sequelize.DATE,
             },
         })

@@ -7,10 +7,32 @@ import {
     Input,
     Spacer,
     Stack,
+    Textarea,
 } from '@chakra-ui/react'
 import { FormError } from '~/components/common'
 import { useTranslation } from 'react-i18next'
 import { route } from '~/services/routes'
+import type { ActionArgs } from '@remix-run/node'
+import { getUid } from '~/services/auth'
+import { createGoal } from '~/services/goals'
+
+export const action = async ({ request }: ActionArgs) => {
+    const uid = await getUid(request)
+
+    // TODO data helper?
+    const form = await request.formData()
+    const title = form.get('title') as string
+    const subtitle = form.get('subtitle') as string
+    const description = form.get('description') as string
+    const deadline = form.get('deadline') as string
+
+    return await createGoal(uid as string, {
+        title,
+        subtitle,
+        description,
+        deadline,
+    })
+}
 
 const GoalsCreate = () => {
     const { t } = useTranslation('goals')
@@ -19,6 +41,9 @@ const GoalsCreate = () => {
 
     // TODO validate
     const titleError = actionData?.title
+    const subtitleError = actionData?.subtitle
+    const descriptionError = actionData?.description
+    const deadlineError = actionData?.deadline
 
     return (
         <Form method="post">
@@ -27,6 +52,24 @@ const GoalsCreate = () => {
                     <FormLabel>{t('title')}</FormLabel>
                     <Input name="title" />
                     <FormError error={titleError} />
+                </FormControl>
+
+                <FormControl isInvalid={subtitleError}>
+                    <FormLabel>{t('subtitle')}</FormLabel>
+                    <Input name="subtitle" />
+                    <FormError error={subtitleError} />
+                </FormControl>
+
+                <FormControl isInvalid={descriptionError}>
+                    <FormLabel>{t('description')}</FormLabel>
+                    <Textarea name="description" />
+                    <FormError error={descriptionError} />
+                </FormControl>
+
+                <FormControl isInvalid={deadlineError}>
+                    <FormLabel>{t('deadline')}</FormLabel>
+                    <Input name="deadline" type="date" />
+                    <FormError error={deadlineError} />
                 </FormControl>
 
                 <Flex alignItems="center">
