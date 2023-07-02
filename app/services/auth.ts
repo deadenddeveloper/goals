@@ -5,11 +5,8 @@ import {
 } from 'firebase/auth'
 import { auth as authService } from '~/services/firebase'
 import { userSchema } from '~/validation/user'
-import { presentYupValidationError } from '~/presenters/yup'
-import { ValidationError } from 'yup'
-import { json } from '@remix-run/router'
 import { createCookieSessionStorage, redirect } from '@remix-run/node'
-import { FirebaseError } from '@firebase/app'
+import { wrapError } from '~/services/error'
 
 const sessionSecret = process.env.SESSION_SECRET
 if (!sessionSecret) {
@@ -82,15 +79,7 @@ const _auth = async (
 
         return createSession(userCredential.user.uid, LOGGED_IN_REDIRECT)
     } catch (error) {
-        if (error instanceof ValidationError) {
-            return json(presentYupValidationError(error), 422)
-        }
-
-        if (error instanceof FirebaseError) {
-            return json({ _e: error.code }, 422)
-        }
-
-        return null
+        return wrapError(error as Error)
     }
 }
 

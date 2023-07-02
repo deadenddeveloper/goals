@@ -24,6 +24,8 @@ const Dashboard = () => {
             </Box>
         )
     }
+
+    return <pre>{JSON.stringify(data, null, 2)}</pre>
 }
 
 export default Dashboard

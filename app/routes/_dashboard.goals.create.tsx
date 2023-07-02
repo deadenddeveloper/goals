@@ -1,3 +1,5 @@
+import type { ActionArgs } from '@remix-run/node'
+
 import { Form, Link, useActionData, useNavigation } from '@remix-run/react'
 import {
     Button,
@@ -12,7 +14,6 @@ import {
 import { FormError } from '~/components/common'
 import { useTranslation } from 'react-i18next'
 import { route } from '~/services/routes'
-import type { ActionArgs } from '@remix-run/node'
 import { getUid } from '~/services/auth'
 import { createGoal } from '~/services/goals'
 
@@ -26,6 +27,7 @@ export const action = async ({ request }: ActionArgs) => {
     const description = form.get('description') as string
     const deadline = form.get('deadline') as string
 
+    // TODO toast
     return await createGoal(uid as string, {
         title,
         subtitle,
