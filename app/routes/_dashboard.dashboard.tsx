@@ -1,4 +1,5 @@
-import type { LoaderArgs } from '@remix-run/node'
+import type { LoaderFunctionArgs } from '@remix-run/node'
+import type { IGoal } from '~/types/goals'
 
 import { json } from '@remix-run/router'
 import { Link, useLoaderData } from '@remix-run/react'
@@ -6,8 +7,9 @@ import { getUid } from '~/services/auth'
 import { Box, Button, Text } from '@chakra-ui/react'
 import { getGoals } from '~/services/goals'
 import { route } from '~/services/routes'
+import { Goal } from '~/components/goals/Goal'
 
-export async function loader({ request }: LoaderArgs) {
+export async function loader({ request }: LoaderFunctionArgs) {
     return json(await getGoals((await getUid(request)) as string))
 }
 
@@ -25,7 +27,7 @@ const Dashboard = () => {
         )
     }
 
-    return <pre>{JSON.stringify(data, null, 2)}</pre>
+    return data.map((goal: IGoal) => <Goal goal={goal} />)
 }
 
 export default Dashboard

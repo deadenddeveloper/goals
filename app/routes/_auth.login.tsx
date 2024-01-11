@@ -1,4 +1,4 @@
-import type { ActionArgs } from '@remix-run/node'
+import type { ActionFunctionArgs } from '@remix-run/node'
 
 import { useTranslation } from 'react-i18next'
 import { Box, Divider, Heading, Stack, Text, Link } from '@chakra-ui/react'
@@ -9,7 +9,7 @@ import { faRightToBracket } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { route } from '~/services/routes'
 
-export const action = async ({ request }: ActionArgs) => {
+export const action = async ({ request }: ActionFunctionArgs) => {
     const form = await request.formData()
     const email = form.get('email') as string
     const password = form.get('password') as string

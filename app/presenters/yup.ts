@@ -1,5 +1,5 @@
 import type { ValidationError } from 'yup'
-import type { FormValidationErrors } from '~/types'
+import type { FormValidationErrors } from '~/types/validation'
 
 const prepareParams = (type: string, params: Record<string, unknown>) => {
     const fieldsWithCount = ['min']

@@ -4,7 +4,7 @@ export enum GoalStatus {
     ARCHIVED = 'archived',
 }
 
-export interface Goal {
+export interface IGoal {
     id: string
     title: string
     subtitle: string

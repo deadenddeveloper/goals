@@ -2,7 +2,7 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signOut,
-} from 'firebase/auth'
+} from '@firebase/auth'
 import { auth as authService } from '~/services/firebase'
 import { userSchema } from '~/validation/user'
 import { createCookieSessionStorage, redirect } from '@remix-run/node'

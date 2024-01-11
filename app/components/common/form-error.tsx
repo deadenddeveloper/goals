@@ -1,4 +1,4 @@
-import type { FormValidationError } from '~/types'
+import type { FormValidationError } from '~/types/validation'
 
 import { FormErrorMessage } from '@chakra-ui/react'
 import { useTranslation } from 'react-i18next'

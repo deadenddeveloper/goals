@@ -1,4 +1,4 @@
-import type { AuthProvider, UserCredential } from 'firebase/auth'
+import type { AuthProvider, UserCredential } from '@firebase/auth'
 
 import { Button, Flex, Stack, Text, useToast } from '@chakra-ui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -13,7 +13,7 @@ import {
     GoogleAuthProvider,
     FacebookAuthProvider,
     GithubAuthProvider,
-} from 'firebase/auth'
+} from '@firebase/auth'
 import { auth } from '~/services/firebase'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
